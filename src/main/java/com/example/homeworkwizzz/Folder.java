@@ -10,20 +10,17 @@ public class Folder {
 
     public Folder(String name){
         this.name = name;
+        file = new File(name);
         //automatically creates a folder when constructor is called
-        createFolder();
     }
 
-    private void createFolder(){
-        file = new File(name);
+    public boolean createFolder(){
         //returns true if the directory is created successfully
-        boolean success = file.mkdirs();
-        if (success){
-            System.out.println(name + " created successfully");
-        }else {
-            //if it's not, it means the directory already exists
-            System.out.println(name + " already exists");
-        }
+        return file.mkdirs();
+    }
+
+    public boolean folderExists(){
+       return getFile().exists();
     }
 
     //override constructor in case a name isn't given

@@ -1,5 +1,6 @@
 package com.example.homeworkwizzz;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -86,10 +88,10 @@ public class SignupController {
 
     public void signupBackButton(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HomeworkWizz.class.getResource("login.fxml"));
+            stage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
             stage.setScene(scene);
             stage.show();
         }catch (IOException e){
@@ -101,58 +103,63 @@ public class SignupController {
         }
     }
 
-    public void createAccountButton(ActionEvent e) throws Exception {
-        File file = new File("users.txt");
+    public void createAccountButton(ActionEvent e) {
+        Platform.runLater(() -> {
+            try {
+                File file = new File("users.txt");
+
+                if (!file.exists()) {
+                    FileUtilities.writeToFile("users.txt", "", true);
+                }
+
+                FileDecryption.decryptFile();
+
+                String username = signupUsername.getText();
+                String password = signupPassword.getText();
+                String confirmedPassword = signupConfirmPassword.getText();
 
 
-        if (!file.exists()){
-            FileUtilities.writeToFile("users.txt", "", false);
-        }
-
-        FileDecryption.decryptFile();
-
-        String username = signupUsername.getText();
-        String password = signupPassword.getText();
-        String confirmedPassword = signupConfirmPassword.getText();
-
-
-        if (Database.checkUsername("users.txt", username)) {
-            passwordLengthLabel.setVisible(false);
-            confirmPasswordLabel.setVisible(false);
-            accountSuccessfullyCreatedLabel.setVisible(false);
-            usernameLengthLabel.setVisible(false);
-            accountAlreadyExistsLabel.setVisible(true);
-            FileEncryption.encryptFile();
-        } else if (username.length() == 0) {
-            accountAlreadyExistsLabel.setVisible(false);
-            passwordLengthLabel.setVisible(false);
-            confirmPasswordLabel.setVisible(false);
-            accountSuccessfullyCreatedLabel.setVisible(false);
-            usernameLengthLabel.setVisible(true);
-            FileEncryption.encryptFile();
-        } else if (password.length() < 8) {
-            accountAlreadyExistsLabel.setVisible(false);
-            confirmPasswordLabel.setVisible(false);
-            accountSuccessfullyCreatedLabel.setVisible(false);
-            usernameLengthLabel.setVisible(false);
-            passwordLengthLabel.setVisible(true);
-            FileEncryption.encryptFile();
-        } else if (!password.equals(confirmedPassword)) {
-            accountAlreadyExistsLabel.setVisible(false);
-            passwordLengthLabel.setVisible(false);
-            accountSuccessfullyCreatedLabel.setVisible(false);
-            usernameLengthLabel.setVisible(false);
-            confirmPasswordLabel.setVisible(true);
-            FileEncryption.encryptFile();
-        } else {
-            accountAlreadyExistsLabel.setVisible(false);
-            passwordLengthLabel.setVisible(false);
-            confirmPasswordLabel.setVisible(false);
-            usernameLengthLabel.setVisible(false);
-            Account newAccount = new Account(username, password);
-            Database.addToTextDatabase("users.txt", newAccount, true);
-            FileEncryption.encryptFile();
-            accountSuccessfullyCreatedLabel.setVisible(true);
-        }
+                if (Database.checkUsername("users.txt", username)) {
+                    passwordLengthLabel.setVisible(false);
+                    confirmPasswordLabel.setVisible(false);
+                    accountSuccessfullyCreatedLabel.setVisible(false);
+                    usernameLengthLabel.setVisible(false);
+                    accountAlreadyExistsLabel.setVisible(true);
+                    FileEncryption.encryptFile();
+                } else if (username.length() == 0) {
+                    accountAlreadyExistsLabel.setVisible(false);
+                    passwordLengthLabel.setVisible(false);
+                    confirmPasswordLabel.setVisible(false);
+                    accountSuccessfullyCreatedLabel.setVisible(false);
+                    usernameLengthLabel.setVisible(true);
+                    FileEncryption.encryptFile();
+                } else if (password.length() < 8) {
+                    accountAlreadyExistsLabel.setVisible(false);
+                    confirmPasswordLabel.setVisible(false);
+                    accountSuccessfullyCreatedLabel.setVisible(false);
+                    usernameLengthLabel.setVisible(false);
+                    passwordLengthLabel.setVisible(true);
+                    FileEncryption.encryptFile();
+                } else if (!password.equals(confirmedPassword)) {
+                    accountAlreadyExistsLabel.setVisible(false);
+                    passwordLengthLabel.setVisible(false);
+                    accountSuccessfullyCreatedLabel.setVisible(false);
+                    usernameLengthLabel.setVisible(false);
+                    confirmPasswordLabel.setVisible(true);
+                    FileEncryption.encryptFile();
+                } else {
+                    accountAlreadyExistsLabel.setVisible(false);
+                    passwordLengthLabel.setVisible(false);
+                    confirmPasswordLabel.setVisible(false);
+                    usernameLengthLabel.setVisible(false);
+                    Account newAccount = new Account(username, password);
+                    Database.addToTextDatabase("users.txt", newAccount, true);
+                    FileEncryption.encryptFile();
+                    accountSuccessfullyCreatedLabel.setVisible(true);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }

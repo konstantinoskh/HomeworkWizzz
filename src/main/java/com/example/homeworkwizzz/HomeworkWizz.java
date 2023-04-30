@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 
 public class HomeworkWizz extends Application {
@@ -18,7 +17,7 @@ public class HomeworkWizz extends Application {
             stage.setScene(scene);
             stage.show();
         }catch (IOException e){
-            System.out.println("IOException");
+            e.printStackTrace();
         }catch (RuntimeException e){
             System.out.println("RuntimeException");
         }
