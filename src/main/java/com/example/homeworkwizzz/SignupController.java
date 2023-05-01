@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -88,11 +89,14 @@ public class SignupController {
 
     public void signupBackButton(ActionEvent event){
         try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HomeworkWizz.class.getResource("login.fxml"));
-            stage.initStyle(StageStyle.UNDECORATED);
-            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-            stage.setScene(scene);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Log In");
+            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+            stage.getIcons().add(icon);
+            stage.setResizable(false);
+            stage.setScene(new Scene(root, 520, 400));
             stage.show();
         }catch (IOException e){
             System.out.println("Couldn't load screen: " + e.getMessage());

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -47,7 +48,8 @@ public class LoginController {
         usernameTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
                 try{
-                    handleEnterKey();
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    handleEnterKey(stage);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -56,7 +58,8 @@ public class LoginController {
         passwordField.setOnKeyPressed( event -> {
             if (event.getCode() == KeyCode.ENTER){
                 try{
-                    handleEnterKey();
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    handleEnterKey(stage);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -106,11 +109,14 @@ public class LoginController {
 
                     if (!newFolder.exists()) {
                         try {
-                            Stage stage = new Stage();
-                            FXMLLoader fxmlLoader = new FXMLLoader(HomeworkWizz.class.getResource("subjectChoice.fxml"));
-                            stage.initStyle(StageStyle.UNDECORATED);
-                            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-                            stage.setScene(scene);
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("subjectChoice.fxml"));
+                            Parent root = fxmlLoader.load();
+                            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                            stage.setTitle("Subject Choice");
+                            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+                            stage.getIcons().add(icon);
+                            stage.setResizable(false);
+                            stage.setScene(new Scene(root, 520, 400));
                             stage.show();
                         } catch (IOException exception) {
                             System.out.println("IOException");
@@ -121,11 +127,14 @@ public class LoginController {
                         }
                     } else {
                         try {
-                            Stage stage = new Stage();
-                            FXMLLoader fxmlLoader = new FXMLLoader(HomeworkWizz.class.getResource("mainMenu.fxml"));
-                            stage.initStyle(StageStyle.UNDECORATED);
-                            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-                            stage.setScene(scene);
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+                            Parent root = fxmlLoader.load();
+                            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                            stage.setTitle("Main Menu");
+                            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+                            stage.getIcons().add(icon);
+                            stage.setResizable(false);
+                            stage.setScene(new Scene(root, 520, 400));
                             stage.show();
                         } catch (IOException exception) {
                             System.out.println("IOException");
@@ -142,21 +151,96 @@ public class LoginController {
         });
     }
 
-    private void handleEnterKey() {
-        try {
-            loginButton(new ActionEvent());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void handleEnterKey(Stage stage) {
+        Platform.runLater(() -> {
+            try {
+                File file = new File("users.txt");
+
+                if (!file.exists()) {
+                    FileUtilities.writeToFile("users.txt", "", true);
+                }
+
+                FileDecryption.decryptFile();
+
+                String username = usernameTextField.getText();
+                String password = passwordField.getText();
+
+                if (username.length() == 0) {
+                    accountDoesntExistLabel.setVisible(false);
+                    passwordIsIncorrectLabel.setVisible(false);
+                    enterUsernameLabel.setVisible(true);
+                    FileEncryption.encryptFile();
+                } else if (!Database.checkUsername("users.txt", username)) {
+                    accountDoesntExistLabel.setVisible(true);
+                    passwordIsIncorrectLabel.setVisible(false);
+                    enterUsernameLabel.setVisible(false);
+                    FileEncryption.encryptFile();
+                } else if (!Database.checkUsernameAndPassword("users.txt", username, password)) {
+                    accountDoesntExistLabel.setVisible(false);
+                    passwordIsIncorrectLabel.setVisible(true);
+                    enterUsernameLabel.setVisible(false);
+                    FileEncryption.encryptFile();
+                } else {
+                    FileEncryption.encryptFile();
+                    Folder userFolder = new Folder(username);
+                    if (!userFolder.folderExists()) {
+                        userFolder.createFolder();
+                    }
+
+                    File newFolder = new File(username, "English");
+
+                    if (!newFolder.exists()) {
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("subjectChoice.fxml"));
+                            Parent root = fxmlLoader.load();
+                            stage.setTitle("Subject Choice Menu");
+                            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+                            stage.getIcons().add(icon);
+                            stage.setScene(new Scene(root, 900, 600));
+                            stage.setResizable(true);
+                            stage.show();
+                        } catch (IOException exception) {
+                            System.out.println("IOException");
+                        } catch (RuntimeException r) {
+                            r.printStackTrace();
+                        } catch (Exception exception) {
+                            System.out.println("Exception");
+                        }
+                    } else {
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+                            Parent root = fxmlLoader.load();
+                            stage.setTitle("Main Menu");
+                            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+                            stage.getIcons().add(icon);
+                            stage.setResizable(false);
+                            stage.setScene(new Scene(root, 520, 400));
+                            stage.show();
+                        } catch (IOException exception) {
+                            System.out.println("IOException");
+                        } catch (RuntimeException r) {
+                            System.out.println("Runtime Exception");
+                        } catch (Exception exception) {
+                            System.out.println("Exception");
+                        }
+                    }
+                }
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        });
     }
 
     public void signupButton(ActionEvent event) {
         try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HomeworkWizz.class.getResource("signup.fxml"));
-            stage.initStyle(StageStyle.UNDECORATED);
-            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-            stage.setScene(scene);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("signup.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Sign Up");
+            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+            stage.getIcons().add(icon);
+            stage.setResizable(false);
+            stage.setScene(new Scene(root, 520, 400));
             stage.show();
         }catch (IOException e){
             System.out.println("Error loading screen: " + e.getMessage());

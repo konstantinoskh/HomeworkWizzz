@@ -49,7 +49,7 @@
                </font>
             </Text>
             <TextField fx:id="usernameTextField" layoutX="64.0" layoutY="146.0" prefHeight="38.0" prefWidth="212.0" promptText="Username" />
-            <Button fx:id="loginButton" layoutX="67.0" layoutY="262.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="31.0" prefWidth="59.0" text="Login">
+            <Button fx:id="loginButton" layoutX="66.0" layoutY="262.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="31.0" prefWidth="59.0" text="Login">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -57,26 +57,12 @@
                   <Font name="Dubai Regular" size="12.0" />
                </font>
             </Button>
-            <PasswordField fx:id="passwordField" layoutX="64.0" layoutY="204.0" prefHeight="38.0" prefWidth="211.0"  promptText="Password" />
-            <Button fx:id="exitButton" layoutX="140.0" layoutY="262.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="31.0" prefWidth="59.0" text="Exit">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Dubai Regular" size="12.0" />
-               </font>
-            </Button>
+            <PasswordField fx:id="passwordField" layoutX="64.0" layoutY="204.0" prefHeight="38.0" prefWidth="211.0" promptText="Password" />
             <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="20.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="C:\Users\khkon\Downloads\552721.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="39.0" fitWidth="36.0" layoutX="19.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="C:\Users\khkon\Downloads\2889676.png" />
-               </image>
             </ImageView>
-            <Button fx:id="signupButton" layoutX="130.0" layoutY="356.0" mnemonicParsing="false" onAction="#signupButton" style="-fx-background-color: transparent;" text="Sign Up" textFill="#09028e" underline="true">
+            <Button fx:id="signupButton" layoutX="139.0" layoutY="262.0" mnemonicParsing="false" onAction="#signupButton" prefHeight="30.0" prefWidth="58.0" text="Sign Up">
                <font>
                   <Font name="Dubai Regular" size="12.0" />
                </font>
@@ -87,6 +73,16 @@
             <Label fx:id="accountDoesntExistLabel" layoutX="65.0" layoutY="184.0" text="The account doesn't exist" textFill="RED" visible="false" />
             <Label fx:id="passwordIsIncorrectLabel" layoutX="65.0" layoutY="242.0" text="Password is incorrect" textFill="RED" visible="false" />
             <Label fx:id="enterUsernameLabel" layoutX="65.0" layoutY="185.0" text="Please enter a username" textFill="RED" visible="false" />
+            <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="22.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/666201.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="43.0" fitWidth="39.0" layoutX="20.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/2889676.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </right>

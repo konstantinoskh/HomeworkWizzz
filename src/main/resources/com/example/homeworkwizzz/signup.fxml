@@ -36,19 +36,13 @@
       <AnchorPane prefHeight="282.0" prefWidth="520.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="123.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="C:\Users\khkon\Downloads\552721.png" />
-               </image>
             </ImageView>
             <TextField fx:id="signupUsername" layoutX="169.0" layoutY="-17.0" prefHeight="36.0" prefWidth="274.0" promptText="Username" />
             <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="124.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="C:\Users\khkon\Downloads\2889676.png" />
-               </image>
             </ImageView>
             <PasswordField fx:id="signupPassword" layoutX="168.0" layoutY="54.0" prefHeight="34.0" prefWidth="274.0" promptText="Password" />
-            <PasswordField fx:id="signupConfirmPassword" layoutX="168.0" layoutY="109.0" prefHeight="34.0" prefWidth="274.0" promptText="Confirm Password" />
-            <Button fx:id="createAccountButton" layoutX="168.0" layoutY="166.0" mnemonicParsing="false" onAction="#createAccountButton" prefHeight="31.0" prefWidth="60.0" text="Sign Up">
+            <PasswordField fx:id="signupConfirmPassword" layoutX="168.0" layoutY="104.0" prefHeight="34.0" prefWidth="274.0" promptText="Confirm Password" />
+            <Button fx:id="createAccountButton" layoutX="168.0" layoutY="156.0" mnemonicParsing="false" onAction="#createAccountButton" prefHeight="31.0" prefWidth="60.0" text="Confirm">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -61,11 +55,22 @@
                   <Font name="Franklin Gothic Book" size="16.0" />
                </font>
             </Text>
-            <Label fx:id="confirmPasswordLabel" layoutX="169.0" layoutY="143.0" text="The password needs to match the initial password" textFill="RED" visible="false" />
-            <Label fx:id="passwordLengthLabel" layoutX="168.0" layoutY="88.0" text="The password needs to be at least 8 characters long" textFill="RED" visible="false" />
+            <Label fx:id="confirmPasswordLabel" layoutX="169.0" layoutY="138.0" style="visibility: false;" text="The password needs to match the initial password" textFill="RED" visible="false" />
+            <Label fx:id="passwordLengthLabel" layoutX="168.0" layoutY="87.0" style="visibility: false;" text="The password needs to be at least 8 characters long" textFill="RED" visible="false" />
             <Label fx:id="accountAlreadyExistsLabel" layoutX="169.0" layoutY="21.0" text="The account already exists" textFill="RED" visible="false" />
             <Label fx:id="accountSuccessfullyCreatedLabel" layoutX="168.0" layoutY="207.0" text="Account successfully created!" textFill="#689912" visible="false" />
             <Label fx:id="usernameLengthLabel" layoutX="174.0" layoutY="22.0" text="The username must be at least one character long" textFill="RED" visible="false" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="-74.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="45.0" fitWidth="36.0" layoutX="127.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/666201.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="36.0" fitWidth="39.0" layoutX="128.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/2889676.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>
