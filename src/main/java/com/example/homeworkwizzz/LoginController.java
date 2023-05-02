@@ -23,8 +23,6 @@ import java.io.IOException;
 
 public class LoginController {
     @FXML
-    private Button exitButton;
-    @FXML
     private Button loginButton;
     @FXML
     private Button signupButton;
@@ -38,11 +36,7 @@ public class LoginController {
     private Label passwordIsIncorrectLabel;
     @FXML
     private Label enterUsernameLabel;
-
-    public void exitButton(ActionEvent e){
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
+    public static String username;
 
     public void initialize(){
         usernameTextField.setOnKeyPressed(event -> {
@@ -80,7 +74,7 @@ public class LoginController {
 
                 FileDecryption.decryptFile();
 
-                String username = usernameTextField.getText();
+                username = usernameTextField.getText();
                 String password = passwordField.getText();
 
                 if (username.length() == 0) {
@@ -99,6 +93,7 @@ public class LoginController {
                     enterUsernameLabel.setVisible(false);
                     FileEncryption.encryptFile();
                 } else {
+                    username = usernameTextField.getText();
                     FileEncryption.encryptFile();
                     Folder userFolder = new Folder(username);
                     if (!userFolder.folderExists()) {
@@ -214,7 +209,7 @@ public class LoginController {
                             Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
                             stage.getIcons().add(icon);
                             stage.setResizable(false);
-                            stage.setScene(new Scene(root, 520, 400));
+                            stage.setScene(new Scene(root, 900, 600));
                             stage.show();
                         } catch (IOException exception) {
                             System.out.println("IOException");
@@ -247,5 +242,9 @@ public class LoginController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

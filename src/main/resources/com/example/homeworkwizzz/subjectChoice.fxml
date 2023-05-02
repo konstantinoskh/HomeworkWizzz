@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: e5f3fd;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: e5f3fd;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.homeworkwizzz.SubjectChoiceController">
    <children>
       <HBox prefHeight="167.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
          <children>
@@ -87,32 +87,32 @@
                   <RowConstraints maxHeight="124.0" minHeight="6.199987792968784" prefHeight="6.199987792968784" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1">
+                  <TextField fx:id="subjectOneField" alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1">
                      <font>
                         <Font name="Wingdings 2" size="17.0" />
                      </font>
                   </TextField>
-                  <TextField alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="subjectTwoField" alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Wingdings" size="17.0" />
                      </font>
                   </TextField>
-                  <TextField alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="subjectThreeField" alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="Wingdings" size="17.0" />
                      </font>
                   </TextField>
-                  <TextField alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="subjectFourField" alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="Wingdings" size="17.0" />
                      </font>
                   </TextField>
-                  <TextField alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <TextField fx:id="subjectFiveField" alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="Wingdings" size="17.0" />
                      </font>
                   </TextField>
-                  <TextField alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="subjectSixField" alignment="CENTER" prefHeight="34.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font name="Wingdings" size="17.0" />
                      </font>
@@ -147,12 +147,12 @@
                         <Font name="Dubai Medium" size="24.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" text="Confirm" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                  <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirmButton" prefHeight="30.0" prefWidth="144.0" text="Confirm" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Label style="visibility: false;" text="Please enter all 6 subjects" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                  <Label fx:id="enterAllSubjectsMessage" style="visibility: false;" text="Please enter all 6 subjects" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <GridPane HBox.hgrow="ALWAYS">

@@ -9,14 +9,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class HomeworkWizz extends Application {
-    private Stage stage;
 
-    public Stage getStage(){
-        return stage;
-    }
     @Override
     public void start(Stage stage) {
-        this.stage = stage;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HomeworkWizz.class.getResource("login.fxml"));
             stage.initStyle(StageStyle.DECORATED);
