@@ -176,6 +176,7 @@ public class LoginController {
                     enterUsernameLabel.setVisible(false);
                     FileEncryption.encryptFile();
                 } else {
+                    username = usernameTextField.getText();
                     FileEncryption.encryptFile();
                     Folder userFolder = new Folder(username);
                     if (!userFolder.folderExists()) {
