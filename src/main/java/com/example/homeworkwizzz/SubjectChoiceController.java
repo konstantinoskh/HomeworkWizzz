@@ -36,6 +36,8 @@ public class SubjectChoiceController {
     private Button confirmButton;
     @FXML
     private Label enterAllSubjectsMessage;
+    @FXML
+    private Button subjectChoiceBackButton;
 
     public void initialize(){
         subjectOneField.setOnKeyPressed(event -> {
@@ -98,6 +100,26 @@ public class SubjectChoiceController {
                 }
             }
         });
+    }
+
+    public void subjectChoiceBackButton(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Log In");
+            Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
+            stage.getIcons().add(icon);
+            stage.setResizable(false);
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
+        }catch (IOException e){
+            System.out.println("Couldn't load screen: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Runtime Exception");
+        }catch (Exception e){
+            System.out.println("Exception");
+        }
     }
 
     public void confirmButton(ActionEvent e){
