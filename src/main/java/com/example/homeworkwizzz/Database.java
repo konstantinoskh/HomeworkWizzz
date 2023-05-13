@@ -51,70 +51,7 @@ public class Database {
         return false;
     }
 
-    //prompts user to create an account
 
-
-    public static Account logIn() throws Exception {
-        String username;
-        String password;
-
-        System.out.print("Enter a username: ");
-        username = sc.next();
-        try {
-            //decrypt encrypted file so that the checkUsername method can be used
-            FileDecryption.decryptFile();
-            //check if username exists in database
-            if (!checkUsername(users.getName(), username)) {
-                System.out.println("Account doesn't exist, please create an account \n");
-                //encrypt file before exiting method
-                FileEncryption.encryptFile();
-                //if it doesn't exist stop the logIn method
-                return null;
-            }
-            //catch the exception to the database file not existing
-        }catch (NoSuchFileException e){
-            //print helpful message
-            System.out.println("Account doesn't exist, please create an account \n");
-            return null;
-        }
-
-        //keep prompting for password if it is incorrect
-        while (true) {
-            System.out.print("Enter a password: ");
-            password = sc.next();
-            //check if the password corresponds to username
-            if (!checkUsernameAndPassword(users.getName(), username, password)) {
-                System.out.println("Password is incorrect, check the password \n");
-            } else {
-                loggedIn = true; //show that someone is logged in
-                System.out.println("You have successfully logged in \n");
-                //encrypt the database so that its contents are not visible
-                FileEncryption.encryptFile();
-
-                ArrayList<String> subjects = new ArrayList<>();
-                while(true){
-                    System.out.println("Enter subject that you do: ");
-                    String subject = sc.next();
-                    if (subject.equalsIgnoreCase("stop")){
-                        break;
-                    }
-                    subjects.add(subject);
-                }
-
-                    for (String subject: subjects){
-                        Folder folder = new Folder(subject);
-                    }
-
-                // return an Account object with inputted username and password
-                return new Account(username, password);
-            }
-        }
-    }
-
-    //getter method for logged in field
-    public static boolean isLoggedIn() {
-        return loggedIn;
-    }
     //method checking that the username matches the password
     public static boolean checkUsernameAndPassword(String filename, String username, String password){
         return FileUtilities.checkStringsTogether(filename, username, password);

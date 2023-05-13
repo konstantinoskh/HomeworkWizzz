@@ -38,7 +38,9 @@ public class SubjectChoiceController {
     private Label enterAllSubjectsMessage;
     @FXML
     private Button subjectChoiceBackButton;
+    public static Account account = new Account(LoginController.username);
 
+    @FXML
     public void initialize(){
         subjectOneField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
@@ -50,6 +52,7 @@ public class SubjectChoiceController {
                 }
             }
         });
+
         subjectTwoField.setOnKeyPressed( event -> {
             if (event.getCode() == KeyCode.ENTER){
                 try{
@@ -141,6 +144,7 @@ public class SubjectChoiceController {
         }
 
         if (completed){
+            account.setSubjects(subjects);
             enterAllSubjectsMessage.setVisible(false);
             for (String subject : subjects){
                 File folder = new File(LoginController.username, subject);
@@ -156,12 +160,8 @@ public class SubjectChoiceController {
                 stage.setResizable(true);
                 stage.setScene(new Scene(root, 900, 600));
                 stage.show();
-            } catch (IOException exception) {
-                System.out.println("IOException");
-            } catch (RuntimeException r) {
-                r.printStackTrace();
             } catch (Exception exception) {
-                System.out.println("Exception");
+                exception.printStackTrace();
             }
         }
     }
@@ -185,6 +185,7 @@ public class SubjectChoiceController {
         }
 
         if (completed){
+            account.setSubjects(subjects);
             enterAllSubjectsMessage.setVisible(false);
             for (String subject : subjects){
                 File folder = new File(LoginController.username, subject);

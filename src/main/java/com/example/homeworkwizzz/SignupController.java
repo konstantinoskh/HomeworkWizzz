@@ -49,9 +49,7 @@ public class SignupController {
     @FXML
     private Label usernameLengthLabel;
 
-
-    private static boolean loggedIn; //checks if a user is logged in
-
+    @FXML
     public void initialize() {
         signupConfirmPassword.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {

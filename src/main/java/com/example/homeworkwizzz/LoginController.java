@@ -38,6 +38,7 @@ public class LoginController {
     private Label enterUsernameLabel;
     public static String username;
 
+    @FXML
     public void initialize(){
         usernameTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
@@ -100,9 +101,10 @@ public class LoginController {
                         userFolder.createFolder();
                     }
 
-                    File newFolder = new File(username, "English");
+                    File[] files = userFolder.getFile().listFiles();
 
-                    if (!newFolder.exists()) {
+                    assert files != null;
+                    if (files.length == 0) {
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("subjectChoice.fxml"));
                             Parent root = fxmlLoader.load();
@@ -157,7 +159,7 @@ public class LoginController {
 
                 FileDecryption.decryptFile();
 
-                String username = usernameTextField.getText();
+                username = usernameTextField.getText();
                 String password = passwordField.getText();
 
                 if (username.length() == 0) {
@@ -183,9 +185,10 @@ public class LoginController {
                         userFolder.createFolder();
                     }
 
-                    File newFolder = new File(username, "English");
+                    File[] files = userFolder.getFile().listFiles();
 
-                    if (!newFolder.exists()) {
+                    assert files != null;
+                    if (files.length == 0) {
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("subjectChoice.fxml"));
                             Parent root = fxmlLoader.load();
@@ -209,11 +212,11 @@ public class LoginController {
                             stage.setTitle("Main Menu");
                             Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
                             stage.getIcons().add(icon);
-                            stage.setResizable(false);
+                            stage.setResizable(true);
                             stage.setScene(new Scene(root, 900, 600));
                             stage.show();
                         } catch (IOException exception) {
-                            System.out.println("IOException");
+                            exception.printStackTrace();
                         } catch (RuntimeException r) {
                             System.out.println("Runtime Exception");
                         } catch (Exception exception) {
@@ -243,9 +246,5 @@ public class LoginController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public String getUsername() {
-        return username;
     }
 }
