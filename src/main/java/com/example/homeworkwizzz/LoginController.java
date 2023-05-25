@@ -131,7 +131,7 @@ public class LoginController {
                             Image icon = new Image("C:\\Users\\khkon\\IdeaProjects\\HomeworkWizzz\\src\\main\\resources\\Images\\HomeworkWizz.jpg");
                             stage.getIcons().add(icon);
                             stage.setResizable(false);
-                            stage.setScene(new Scene(root, 520, 400));
+                            stage.setScene(new Scene(root, 900, 600));
                             stage.show();
                         } catch (IOException exception) {
                             System.out.println("IOException");

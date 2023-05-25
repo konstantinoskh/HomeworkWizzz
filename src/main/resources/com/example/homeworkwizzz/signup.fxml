@@ -58,7 +58,7 @@
             <Label fx:id="confirmPasswordLabel" layoutX="169.0" layoutY="138.0" style="visibility: false;" text="The password needs to match the initial password" textFill="RED" visible="false" />
             <Label fx:id="passwordLengthLabel" layoutX="168.0" layoutY="87.0" style="visibility: false;" text="The password needs to be at least 8 characters long" textFill="RED" visible="false" />
             <Label fx:id="accountAlreadyExistsLabel" layoutX="169.0" layoutY="21.0" text="The account already exists" textFill="RED" visible="false" />
-            <Label fx:id="accountSuccessfullyCreatedLabel" layoutX="168.0" layoutY="207.0" text="Account successfully created!" textFill="#689912" visible="false" />
+            <Label fx:id="accountSuccessfullyCreatedLabel" layoutX="168.0" layoutY="207.0" text="Account successfully created! Go back to log in" textFill="#689912" visible="false" />
             <Label fx:id="usernameLengthLabel" layoutX="174.0" layoutY="22.0" text="The username must be at least one character long" textFill="RED" visible="false" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="-74.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="45.0" fitWidth="36.0" layoutX="127.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">

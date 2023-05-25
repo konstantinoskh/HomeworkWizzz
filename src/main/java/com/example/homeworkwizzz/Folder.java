@@ -11,7 +11,6 @@ public class Folder {
     public Folder(String name){
         this.name = name;
         file = new File(name);
-        //automatically creates a folder when constructor is called
     }
 
     public boolean createFolder(){
