@@ -1,0 +1,24 @@
+Kill Kon:false
+Wrestle Kon:false
+Armbar Kon:true
+Rear-Naked Choke Kon:true
+Triangle Choke Kon:false
+Kimura Kon:true
+Americana Kon:true
+Twister Kon:false
+Knee-bar Kon:false
+Ankle Lock Kon:false
+Toe hold Kon:false
+Bulldog Choke Kon:true
+North-South Choke Kon:false
+Buggy Choke Kon:false
+Guillotine:true
+D'arce choke:true
+Clock choke:false
+Arm Triangle:true
+Crucifix choke:false
+Anaconda Choke:false
+Peruvian necktie:false
+Japanese necktie:false
+Gogoplata:false
+Von flue choke:false
