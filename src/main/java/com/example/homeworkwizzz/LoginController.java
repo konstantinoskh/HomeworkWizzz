@@ -50,7 +50,7 @@ public class LoginController {
                 }
             }
         });
-        passwordField.setOnKeyPressed( event -> {
+        passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
                 try{
                     Stage stage = (Stage) loginButton.getScene().getWindow();
