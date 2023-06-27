@@ -169,7 +169,10 @@
                   <RowConstraints maxHeight="194.79999389648438" minHeight="10.0" prefHeight="98.19999999999999" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ListView fx:id="searchResults" prefHeight="111.0" prefWidth="334.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+                  <ListView fx:id="searchResults" onMouseClicked="#onSearchItemClick" prefHeight="111.0" prefWidth="334.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ListView>
                   <Label fx:id="welcomeMessage" text="WELCOME, NAME" translateX="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Franklin Gothic Book" size="21.0" />
@@ -187,6 +190,11 @@
                      </cursor>
                   </Button>
                   <Label fx:id="noUserInputLabel" text="Please enter something" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <ListView fx:id="searchResults1" layoutX="57.0" layoutY="151.0" onMouseClicked="#onSearchItemClick" prefHeight="111.0" prefWidth="334.0" visible="false">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ListView>
                </children>
             </GridPane>
             <GridPane alignment="CENTER" focusTraversable="true" prefHeight="0.0" prefWidth="440.0" VBox.vgrow="ALWAYS">
@@ -203,7 +211,18 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ListView fx:id="fileListView" layoutX="-69.0" layoutY="-133.0" prefHeight="354.0" prefWidth="453.0" AnchorPane.bottomAnchor="-108.0" AnchorPane.leftAnchor="-69.0" AnchorPane.rightAnchor="-50.0" AnchorPane.topAnchor="-133.0" />
+                        <ListView fx:id="fileListView" layoutX="-69.0" layoutY="-133.0" onMouseClicked="#onItemClick" prefHeight="354.0" prefWidth="453.0" visible="false" AnchorPane.bottomAnchor="-108.0" AnchorPane.leftAnchor="-69.0" AnchorPane.rightAnchor="-50.0" AnchorPane.topAnchor="-133.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ListView>
+                        <Button fx:id="closeButton" layoutX="360.2" layoutY="-132.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="18.0" prefWidth="23.0" style="-fx-background-color: white;" text="X" visible="false" AnchorPane.rightAnchor="-49.0" AnchorPane.topAnchor="-132.0">
+                           <font>
+                              <Font name="Century Gothic" size="10.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
@@ -276,7 +295,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="deleteButton" layoutX="162.0" mnemonicParsing="false" onAction="#saveText" style="-fx-background-color: none;" text="Delete" textFill="#1f2fbf" underline="true" AnchorPane.bottomAnchor="-3.552713678800501E-15" AnchorPane.rightAnchor="7.600000000000023">
+                        <Button fx:id="deleteButton" layoutX="162.0" mnemonicParsing="false" onAction="#saveText" style="-fx-background-color: none;" text="Clear" textFill="#1f2fbf" underline="true" AnchorPane.bottomAnchor="-3.552713678800501E-15" AnchorPane.rightAnchor="7.600000000000023">
                            <font>
                               <Font size="13.0" />
                            </font>

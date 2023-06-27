@@ -3,13 +3,20 @@ package com.example.homeworkwizzz;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.awt.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +56,10 @@ public class MainMenuController {
     private ListView<CheckBox> todolistListView;
     @FXML
     private ListView<String> fileListView;
+    @FXML
+    private Button closeButton;
     public static Account account = new Account(LoginController.username);
+    public static ArrayList currentDirectory = new ArrayList<>();
     private ArrayList<String> subjects;
 
 
@@ -140,6 +150,8 @@ public class MainMenuController {
         String userInput = searchBar.getText();
         searchResults.getItems().clear();
         searchResults.setVisible(false);
+        fileListView.setVisible(false);
+        closeButton.setVisible(false);
 
         if (userInput.length() != 0) {
             File directory = new File(account.getUsername());
@@ -149,7 +161,7 @@ public class MainMenuController {
                 noFileFoundLabel.setVisible(true);
             }else {
                 for (File file : results){
-                    searchResults.getItems().add(file.getName());
+                    searchResults.getItems().add(file.getPath());
                     searchResults.setVisible(true);
                 }
             }
@@ -207,6 +219,7 @@ public class MainMenuController {
 
     public void onFileCLick(Label clickedLabel){
         fileListView.getItems().clear();
+        searchResults.setVisible(false);
         File directory = new File(LoginController.username);
         String fileName = clickedLabel.getText();
         File file = new File(directory, fileName);
@@ -214,11 +227,119 @@ public class MainMenuController {
 
         if (files == null){
             fileListView.setVisible(true);
+            closeButton.setVisible(true);
         }else{
             for (File file1 : files){
                 fileListView.getItems().add(file1.getName());
                 fileListView.setVisible(true);
+                closeButton.setVisible(true);
+
+                if (currentDirectory.size() != 0) {
+                    currentDirectory.clear();
+                }
             }
+        }
+        currentDirectory.add(LoginController.username);
+        currentDirectory.add(fileName);
+    }
+
+    public void onFileCLick(String fileName){
+        fileListView.getItems().clear();
+        String filePath = "";
+
+        for (int i=0; i<=currentDirectory.size()-2; i++){
+            filePath = filePath + currentDirectory.get(i) + "\\";
+        }
+        filePath = filePath + currentDirectory.get(currentDirectory.size()-1);
+
+        File file = new File(filePath, fileName);
+        ArrayList<File> files = Search.listFiles(file);
+
+        if (files.size() == 0){
+            fileListView.setVisible(true);
+            closeButton.setVisible(true);
+        }else{
+            for (File file1 : files){
+                fileListView.getItems().add(file1.getName());
+                fileListView.setVisible(true);
+                closeButton.setVisible(true);
+            }
+            currentDirectory.add(fileName);
+        }
+    }
+
+    public void closeButton(){
+        fileListView.setVisible(false);
+        closeButton.setVisible(false);
+    }
+
+    public void onItemClick() {
+        String selectedItem = fileListView.getSelectionModel().getSelectedItem();
+        searchResults.setVisible(false);
+        if (selectedItem == null){
+            return;
+        }
+
+        String filePath = "";
+
+        for (int i=0; i<=currentDirectory.size()-2; i++){
+            filePath = filePath + currentDirectory.get(i) + "\\";
+        }
+        filePath = filePath + currentDirectory.get(currentDirectory.size()-1);
+
+        File directory = new File(filePath);
+        File file = new File(directory, selectedItem);
+
+        if (file.isDirectory()){
+            onFileCLick(selectedItem);
+        }else{
+            Desktop desktop = Desktop.getDesktop();
+            try{
+                desktop.open(file);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
+    public void onSearchItemClick(){
+        String selectedFilePath = searchResults.getSelectionModel().getSelectedItem();
+        if (selectedFilePath == null){
+            return;
+        }
+
+        File file = new File(selectedFilePath);
+        if (file.isDirectory()){
+            onSearchFileCLick(selectedFilePath);
+        }else{
+            Desktop desktop = Desktop.getDesktop();
+            try{
+                desktop.open(file);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void onSearchFileCLick(String filePath){
+        fileListView.getItems().clear();
+
+        File file = new File(filePath);
+        ArrayList<File> files = Search.listFiles(file);
+
+        if (files.size() == 0){
+            fileListView.setVisible(true);
+            closeButton.setVisible(true);
+        }else{
+            for (File file1 : files){
+                fileListView.getItems().add(file1.getName());
+                fileListView.setVisible(true);
+                closeButton.setVisible(true);
+            }
+            currentDirectory.clear();
+            currentDirectory = new ArrayList<>(Arrays.asList(filePath.split("\\\\")));
+            searchResults.setVisible(false);
         }
     }
 }

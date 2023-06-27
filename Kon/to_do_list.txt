@@ -1,5 +1,7 @@
-what:true
-Let's do hw:false
+what:false
+Let's do hw:true
 do spanish:true
 start ee:true
 Jababa:true
+What:false
+hw:false
